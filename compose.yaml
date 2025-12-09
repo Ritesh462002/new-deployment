@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: backend_mongodb
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - backend_network
+
+  backend:
+    image : riteshdevnew/blog-api:v2
+    container_name: backend_app
+    restart: unless-stopped
+    depends_on:
+      - mongodb
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+      MONGODB_URI: ${MONGODB_URI}
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - backend_network
+    command: npm start
+
+volumes:
+  mongodb_data:
+
+networks:
+  backend_network:

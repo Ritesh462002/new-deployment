@@ -10,6 +10,10 @@ router.get("/docs", apiDocs);
 
 router.use("/posts", postRouter);     
 router.use("/", commentRoutes);
-router.use("/", categoryRoutes);      
+router.use("/", categoryRoutes);
+
+router.use("/",(_req,res)=>{
+res.status(200).json({status:"Check it up"})
+})
 
 export default router;
