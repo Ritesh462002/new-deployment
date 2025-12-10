@@ -28,7 +28,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            riteshdevnew/blog-api:v2
+           riteshdevnew/blog-api:latest
 
       - name: SSH into EC2 and deploy
         uses: appleboy/ssh-action@v1.2.0
