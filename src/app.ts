@@ -18,11 +18,11 @@ app.use(morgan("dev"))
 
 app.use(express.json())
 
-app.get("/test", (_req, res) => {
-  res.status(200).json({ status: "ok" });
+app.get("/health", (_req, res) => {
+  res.send("New version deployed");
 });
 
-app.get("/health", (_req, res) => {
+app.get("/health2", (_req, res) => {
   res.send("New version deployed");
 });
 
