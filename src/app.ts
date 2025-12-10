@@ -22,6 +22,11 @@ app.get("/test", (_req, res) => {
   res.status(200).json({ status: "ok" });
 });
 
+app.get("/health", (_req, res) => {
+  res.send("New version deployed");
+});
+
+
 app.use("/api/vi",router)
 
 // 404 handler
